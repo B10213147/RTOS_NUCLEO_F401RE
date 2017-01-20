@@ -11,8 +11,14 @@
 #ifdef __cplusplus
  extern "C" {
 #endif /* __cplusplus */
+	 
+#include <stdint.h>
 
-void rtos_init(void);
+/* rtos kernel API */
+void rtos_init(uint32_t slice);
+
+/* rtos scheduler API */	 
+void rtos_sched(void);
 	 
 #ifdef __cplusplus
 }
