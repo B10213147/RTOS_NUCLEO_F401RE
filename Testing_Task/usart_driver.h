@@ -3,7 +3,7 @@
  *
  *  Created on: Jan 20, 2017
  *      Author: Harvard Tseng
- */
+**/
  
 #ifndef __USART_DRIVER_H
 #define __USART_DRIVER_H
