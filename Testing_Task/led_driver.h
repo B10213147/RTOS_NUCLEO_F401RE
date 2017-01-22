@@ -11,6 +11,9 @@
 #ifdef __cplusplus
  extern "C" {
 #endif /* __cplusplus */
+
+void led_driver_init(void);
+void led_driver(void); 
 	 
 #ifdef __cplusplus
 }

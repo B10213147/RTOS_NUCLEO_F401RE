@@ -11,6 +11,9 @@
 #ifdef __cplusplus
  extern "C" {
 #endif /* __cplusplus */
+
+void usart_driver_init(void);
+void usart_driver(void);
 	 
 #ifdef __cplusplus
 }

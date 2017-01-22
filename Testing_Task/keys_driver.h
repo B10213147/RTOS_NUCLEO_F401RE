@@ -12,6 +12,9 @@
  extern "C" {
 #endif /* __cplusplus */
 	 
+void keys_driver_init(void);
+void keys_driver(void);
+	 
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
