@@ -11,6 +11,8 @@
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_usart.h"
 
+extern int led_f;
+
 void usart_driver_init(void){
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
@@ -35,6 +37,9 @@ void usart_driver(void){
 		uint16_t temp = USART_ReceiveData(USART2);
 		if(USART_GetFlagStatus(USART2, USART_FLAG_TXE) == SET){
 			USART_SendData(USART2, temp);
+		}
+		if(temp >= '1' && temp <= '9'){
+			led_f = (int)(temp - '0');
 		}
 	}
 }

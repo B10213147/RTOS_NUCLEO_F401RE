@@ -18,8 +18,14 @@ void led_driver_init(void){
 	GPIO_Init(GPIOA, &GPIO_InitStruct);
 }
 
-int led_f = 160000;
+int led_f = 1;
+int period = 1000;	// 1000 * time_slice = 1s
+int remain = 0;
 void led_driver(void){
-	for(int i = 0; i < led_f; i++);
-	GPIO_ToggleBits(GPIOA, GPIO_Pin_5);	
+	remain--;
+	if(remain <= 0){
+		GPIO_ToggleBits(GPIOA, GPIO_Pin_5);	
+		int time_intervel = period / 2 / led_f;
+		remain = time_intervel;
+	}
 }
