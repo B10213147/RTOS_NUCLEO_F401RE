@@ -11,10 +11,16 @@
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_usart.h"
 
+extern int led_f;
+
 void usart_driver_init(void){
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
 	
+	//
+	// Enable the GPIO pin for the USART2(PA2, PA3). 
+	// Set the mode as Alternate function.
+	//	
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_USART2);
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_USART2);
 	
@@ -23,6 +29,9 @@ void usart_driver_init(void){
 	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;	
 	GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+	//
+	// Configure the USART2.
+	//
 	USART_InitTypeDef USART_InitStruct;
 	USART_StructInit(&USART_InitStruct);
 	USART_Init(USART2, &USART_InitStruct);
@@ -35,6 +44,9 @@ void usart_driver(void){
 		uint16_t temp = USART_ReceiveData(USART2);
 		if(USART_GetFlagStatus(USART2, USART_FLAG_TXE) == SET){
 			USART_SendData(USART2, temp);
+		}
+		if(temp >= '1' && temp <= '9'){
+			led_f = (int)(temp - '0');
 		}
 	}
 }
