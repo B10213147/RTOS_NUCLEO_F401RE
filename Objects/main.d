@@ -28,3 +28,4 @@
 .\objects\main.o: C:\st\Cortex-M4\STM32F4xx_DSP_StdPeriph_Lib_V1.7.1\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\objects\main.o: C:\st\Cortex-M4\STM32F4xx_DSP_StdPeriph_Lib_V1.7.1\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\objects\main.o: C:\st\Cortex-M4\STM32F4xx_DSP_StdPeriph_Lib_V1.7.1\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
+.\objects\main.o: rtos.h
