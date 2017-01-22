@@ -16,16 +16,18 @@
 	 
 typedef void (*voidfuncptr)(void);
 	 
-typedef enum sch_status{
+typedef enum{
 	task_completed,
 	task_running
 }sch_statusType;
 
-/* rtos kernel API */
+/* rtos kernel */
 void rtos_init(uint32_t slice);
 
-/* rtos scheduler API */	 
+/* rtos scheduler */	 
 void rtos_sched(void);
+
+/* rtos task management */
 extern voidfuncptr priv_task;
 extern voidfuncptr sch_tab[];
 extern int sch_tab_length;

@@ -12,14 +12,18 @@
 void led_driver_init(void){
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
 	
+	//
+	// Enable the GPIO pin for the LED(PA5). 
+	// Set the direction as output.
+	//	
 	GPIO_InitTypeDef GPIO_InitStruct;
 	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_OUT;
 	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_5;
 	GPIO_Init(GPIOA, &GPIO_InitStruct);
 }
 
-int led_f = 1;
-int period = 1000;	// 1000 * time_slice = 1s
+int led_f = 1;	// unit: Hz
+int period = 1000;	// unit: ms
 int remain = 0;
 void led_driver(void){
 	remain--;
