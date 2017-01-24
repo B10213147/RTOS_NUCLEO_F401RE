@@ -5,7 +5,7 @@
  *      Author: Harvard Tseng
 **/
 
-#include "rtos.h"
+#include "rtos_sched.h"
 
 int sch_tst = task_completed;
 int sch_idx = 0;
