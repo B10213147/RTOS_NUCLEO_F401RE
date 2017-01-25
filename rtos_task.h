@@ -26,7 +26,9 @@ extern voidfuncptr priv_task;
 extern voidfuncptr sch_tab[];
 extern int sch_tab_length;
 void rtos_task_create(voidfuncptr func, void *arg);
+void rtos_task_delete(struct rtos_task *task);
 void rtos_task_insert(struct rtos_task **list, struct rtos_task *task);
+void rtos_task_remove(struct rtos_task **list, struct rtos_task *task);
 extern struct rtos_task *rtos_running_task;
 extern struct rtos_task *rtos_ready_tasks;
 	 
