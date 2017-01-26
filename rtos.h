@@ -12,7 +12,9 @@
  extern "C" {
 #endif /* __cplusplus */
 	 
+#include <stdlib.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include "rtos_sched.h"
 #include "rtos_task.h"
 #include "rtos_mail.h"
