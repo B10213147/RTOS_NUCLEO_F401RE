@@ -22,44 +22,36 @@ Dialog DLL:      TCM.DLL V1.14.9.0
  
 <h2>Project:</h2>
 I:\RTOS_NUCLEO_F401RE\rtos.uvprojx
-Project File Date:  01/20/2017
+Project File Date:  01/22/2017
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 2 (build 183)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Build target 'Target 1'
+Rebuild target 'Target 1'
 compiling rtos_sched.c...
-rtos_sched.c(9): warning:  #1-D: last line of file ends without a newline
-   
-rtos_sched.c: 1 warning, 0 errors
-compiling rtos.c...
-rtos.c(9): warning:  #1-D: last line of file ends without a newline
-   
-rtos.c: 1 warning, 0 errors
 compiling rtos_task.c...
-rtos_task.c(9): warning:  #1-D: last line of file ends without a newline
-   
-rtos_task.c: 1 warning, 0 errors
 compiling rtos_mail.c...
 rtos_mail.c(9): warning:  #1-D: last line of file ends without a newline
    
 rtos_mail.c: 1 warning, 0 errors
-compiling led_driver.c...
-Testing_Task\led_driver.c(9): warning:  #1-D: last line of file ends without a newline
-   
-Testing_Task\led_driver.c: 1 warning, 0 errors
-compiling keys_driver.c...
-Testing_Task\keys_driver.c(9): warning:  #1-D: last line of file ends without a newline
-   
-Testing_Task\keys_driver.c: 1 warning, 0 errors
-compiling usart_driver.c...
-Testing_Task\usart_driver.c(9): warning:  #1-D: last line of file ends without a newline
-   
-Testing_Task\usart_driver.c: 1 warning, 0 errors
 compiling main.c...
+main.c(7): warning:  #111-D: statement is unreachable
+  	return 0;
+main.c: 1 warning, 0 errors
+compiling rtos.c...
+compiling stm32f4xx_gpio.c...
+compiling stm32f4xx_rcc.c...
+compiling stm32f4xx_tim.c...
+compiling misc.c...
+compiling keys_driver.c...
+compiling stm32f4xx_usart.c...
+compiling led_driver.c...
+assembling startup_stm32f401xe.s...
+compiling usart_driver.c...
 compiling system_stm32f4xx.c...
 linking...
-Program Size: Code=436 RO-data=420 RW-data=0 ZI-data=1632  
-".\Objects\rtos.axf" - 0 Error(s), 7 Warning(s).
+Program Size: Code=1056 RO-data=436 RW-data=24 ZI-data=1632  
+FromELF: creating hex file...
+".\Objects\rtos.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -85,12 +77,12 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:4.3.0
 
    * Component: Keil::Device:Startup:2.5.0
+      Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c
       Source file:   MDK\Device\Source\ARM\STM32F401xx_OPT.s
-      Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f401xe.s
       Source file:   MDK\Device\Source\ARM\STM32F4xx_OTP.s
       Include file:  Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
-      Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c
-Build Time Elapsed:  00:00:01
+      Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f401xe.s
+Build Time Elapsed:  00:00:05
 </pre>
 </body>
 </html>
