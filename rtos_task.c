@@ -21,8 +21,32 @@ void rtos_task_create(voidfuncptr func, void *arg){
 	task->arg = arg;
 }
 
-void rtos_task_delete(struct rtos_task *task){
+void rtos_task_delete_self(struct rtos_task *task){
 	free(task);
+}
+
+void rtos_task_delete(voidfuncptr func){
+	struct rtos_task *prev, *cur, *del_list = NULL;
+	struct rtos_task **list = &rtos_ready_tasks;
+	
+	prev = *list, cur = *list;
+	while(cur != NULL){	
+		if(cur->function == func){
+			rtos_task_remove(list, cur);
+			rtos_task_insert(&del_list, cur);
+			cur = *list;
+		}
+		else{
+			prev = cur;
+			cur = cur->next;
+		}
+	}
+		
+	while(del_list != NULL){
+		struct rtos_task *del = del_list;
+		rtos_task_remove(&del_list, del);
+		free(del);
+	}
 }
 
 void rtos_task_insert(struct rtos_task **list, struct rtos_task *task){

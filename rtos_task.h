@@ -23,7 +23,8 @@ struct rtos_task{
 };
 
 void rtos_task_create(voidfuncptr func, void *arg);
-void rtos_task_delete(struct rtos_task *task);
+void rtos_task_delete_self(struct rtos_task *task);
+void rtos_task_delete(voidfuncptr func);
 void rtos_task_insert(struct rtos_task **list, struct rtos_task *task);
 void rtos_task_remove(struct rtos_task **list, struct rtos_task *task);
 
