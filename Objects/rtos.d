@@ -1,6 +1,12 @@
 .\objects\rtos.o: rtos.c
 .\objects\rtos.o: rtos.h
+.\objects\rtos.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\rtos.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\rtos.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\rtos.o: rtos_sched.h
+.\objects\rtos.o: rtos.h
+.\objects\rtos.o: rtos_task.h
+.\objects\rtos.o: rtos_mail.h
 .\objects\rtos.o: C:\st\Cortex-M4\STM32F4xx_DSP_StdPeriph_Lib_V1.7.1\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h
 .\objects\rtos.o: C:\st\Cortex-M4\STM32F4xx_DSP_StdPeriph_Lib_V1.7.1\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\rtos.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm4.h

@@ -30,3 +30,11 @@
 .\objects\keys_driver.o: C:\st\Cortex-M4\STM32F4xx_DSP_StdPeriph_Lib_V1.7.1\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\objects\keys_driver.o: C:\st\Cortex-M4\STM32F4xx_DSP_StdPeriph_Lib_V1.7.1\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\objects\keys_driver.o: C:\st\Cortex-M4\STM32F4xx_DSP_StdPeriph_Lib_V1.7.1\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
+.\objects\keys_driver.o: .\rtos.h
+.\objects\keys_driver.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\keys_driver.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\keys_driver.o: .\rtos_sched.h
+.\objects\keys_driver.o: .\rtos.h
+.\objects\keys_driver.o: .\rtos_task.h
+.\objects\keys_driver.o: .\rtos_mail.h
+.\objects\keys_driver.o: Testing_Task\led_driver.h
