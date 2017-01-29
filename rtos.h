@@ -12,23 +12,15 @@
  extern "C" {
 #endif /* __cplusplus */
 	 
+#include <stdlib.h>
 #include <stdint.h>
-	 
-typedef void (*voidfuncptr)(void);
-	 
-typedef enum sch_status{
-	task_completed,
-	task_running
-}sch_statusType;
+#include <stdbool.h>
+#include "rtos_sched.h"
+#include "rtos_task.h"
+#include "rtos_mail.h"
 
-/* rtos kernel API */
+/* rtos kernel */
 void rtos_init(uint32_t slice);
-
-/* rtos scheduler API */	 
-void rtos_sched(void);
-extern voidfuncptr priv_task;
-extern voidfuncptr sch_tab[];
-extern int sch_tab_length;
 	 
 #ifdef __cplusplus
 }
