@@ -5,23 +5,31 @@
  *      Author: Harvard Tseng
 **/
 
-#include "rtos.h"
+#include "rtos_sched.h"
 
-int sch_tst = task_completed;
-int sch_idx = 0;
+void rtos_sched_run(struct rtos_task *task){
+	rtos_task_remove(&rtos_ready_tasks, task);	
+	rtos_running_task = task;
+	
+	rtos_running_task->function(rtos_running_task->arg);	
+	
+	// Put task at the back of the ready list.
+	struct rtos_task *cur;
+	for(cur = rtos_ready_tasks;
+		cur->next != NULL;
+		cur = cur->next);
+	cur->next = rtos_running_task;
+}
 
 void rtos_sched(void){
 	//
 	// Task operate over time_slice will stuck the OS.
 	//
-	if(sch_tst == task_running) while(1);
-	
-	sch_tst = task_running;
+	if(rtos_running_task != NULL) while(1);
 	
 	//priv_task();
-	sch_tab[sch_idx]();
-
-	sch_idx++;
-	if(sch_idx >= sch_tab_length) sch_idx = 0;
-	sch_tst = task_completed;
+	// Run first task on the ready list.
+	rtos_sched_run(rtos_ready_tasks);
+	
+	rtos_running_task = NULL;
 }

@@ -33,3 +33,59 @@ void led_driver(void){
 		remain = time_intervel;
 	}
 }
+
+void task1(void){
+	static int f = 1;
+	static int n_remain = 0;
+	static int state = 1;
+	
+	n_remain--;
+	if(n_remain <= 0){
+		GPIO_WriteBit(GPIOA, GPIO_Pin_5, (BitAction)state);
+		state ^= 1;
+		int time_intervel = period / 2 / f;
+		n_remain = time_intervel;
+	}
+}
+
+void task2(void){
+	static int f = 5;
+	static int n_remain = 0;
+	static int state = 1;
+	
+	n_remain--;
+	if(n_remain <= 0){
+		GPIO_WriteBit(GPIOA, GPIO_Pin_5, (BitAction)state);
+		state ^= 1;
+		int time_intervel = period / 2 / f;
+		n_remain = time_intervel;
+	}
+}
+
+void task3(void){
+	static int f = 10;
+	static int n_remain = 0;
+	static int state = 1;
+	
+	n_remain--;
+	if(n_remain <= 0){
+		GPIO_WriteBit(GPIOA, GPIO_Pin_5, (BitAction)state);
+		state ^= 1;
+		int time_intervel = period / 2 / f;
+		n_remain = time_intervel;
+	}
+}
+
+void task4(void){
+	static int f = 20;
+	static int n_remain = 0;
+	static int state = 1;
+	
+	n_remain--;
+	if(n_remain <= 0){
+		GPIO_WriteBit(GPIOA, GPIO_Pin_5, (BitAction)state);
+		state ^= 1;
+		int time_intervel = period / 2 / f;
+		n_remain = time_intervel;
+	}
+}
