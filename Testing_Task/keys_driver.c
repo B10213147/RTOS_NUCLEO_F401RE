@@ -26,7 +26,7 @@ void keys_driver_init(void){
 	GPIO_Init(GPIOC, &GPIO_InitStruct);
 }
 
-uint8_t last_keys_state;
+uint8_t last_keys_state = 1;
 void keys_driver(void){
 	uint8_t keys_state = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13);
 	

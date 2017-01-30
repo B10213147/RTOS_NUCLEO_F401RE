@@ -39,7 +39,7 @@ void task1(void){
 	static int n_remain = 0;
 	static int state = 1;
 	
-	remain--;
+	n_remain--;
 	if(n_remain <= 0){
 		GPIO_WriteBit(GPIOA, GPIO_Pin_5, (BitAction)state);
 		state ^= 1;
@@ -53,7 +53,7 @@ void task2(void){
 	static int n_remain = 0;
 	static int state = 1;
 	
-	remain--;
+	n_remain--;
 	if(n_remain <= 0){
 		GPIO_WriteBit(GPIOA, GPIO_Pin_5, (BitAction)state);
 		state ^= 1;
@@ -67,7 +67,7 @@ void task3(void){
 	static int n_remain = 0;
 	static int state = 1;
 	
-	remain--;
+	n_remain--;
 	if(n_remain <= 0){
 		GPIO_WriteBit(GPIOA, GPIO_Pin_5, (BitAction)state);
 		state ^= 1;
@@ -81,7 +81,7 @@ void task4(void){
 	static int n_remain = 0;
 	static int state = 1;
 	
-	remain--;
+	n_remain--;
 	if(n_remain <= 0){
 		GPIO_WriteBit(GPIOA, GPIO_Pin_5, (BitAction)state);
 		state ^= 1;

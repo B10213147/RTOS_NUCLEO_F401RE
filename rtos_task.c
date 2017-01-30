@@ -25,10 +25,12 @@ void rtos_task_delete_self(struct rtos_task *task){
 	free(task);
 }
 
+// Delete multiple tasks.
 void rtos_task_delete(voidfuncptr func){
 	struct rtos_task *prev, *cur, *del_list = NULL;
 	struct rtos_task **list = &rtos_ready_tasks;
 	
+	// Search whole list's task which has the same function name.
 	prev = *list, cur = *list;
 	while(cur != NULL){	
 		if(cur->function == func){
@@ -41,7 +43,8 @@ void rtos_task_delete(voidfuncptr func){
 			cur = cur->next;
 		}
 	}
-		
+	
+	// Free memory space.
 	while(del_list != NULL){
 		struct rtos_task *del = del_list;
 		rtos_task_remove(&del_list, del);
@@ -57,10 +60,11 @@ void rtos_task_insert(struct rtos_task **list, struct rtos_task *task){
 void rtos_task_remove(struct rtos_task **list, struct rtos_task *task){
 	struct rtos_task *prev, *cur;
 	
+	// First task on the list.
 	if(*list == task){
 		*list = (*list)->next;
 	}
-	else{
+	else{ // Not first task on the list.
 		for(prev = *list, cur = (*list)->next; 
 			cur != task; 
 			prev = cur, cur = cur->next);
