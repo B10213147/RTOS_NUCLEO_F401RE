@@ -10,8 +10,8 @@
 #include "stm32f4xx_rcc.h"
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_usart.h"
-
-extern int led_f;
+#include "led_driver.h"
+#include "rtos.h"
 
 void usart_driver_init(void){
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
@@ -45,8 +45,16 @@ void usart_driver(void){
 		if(USART_GetFlagStatus(USART2, USART_FLAG_TXE) == SET){
 			USART_SendData(USART2, temp);
 		}
-		if(temp >= '1' && temp <= '9'){
-			led_f = (int)(temp - '0');
+		switch(temp){
+			case '1': rtos_task_create(task1, 0); break;
+			case '2': rtos_task_create(task2, 0); break;
+			case '3': rtos_task_create(task3, 0); break;
+			case '4': rtos_task_create(task4, 0); break;
+			case 'a': rtos_task_delete(task1); break;
+			case 'b': rtos_task_delete(task2); break;
+			case 'c': rtos_task_delete(task3); break;
+			case 'd': rtos_task_delete(task4); break;
+			default: break;
 		}
 	}
 }

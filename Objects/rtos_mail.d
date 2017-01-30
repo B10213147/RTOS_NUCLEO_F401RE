@@ -1,3 +1,10 @@
 .\objects\rtos_mail.o: rtos_mail.c
+.\objects\rtos_mail.o: rtos_mail.h
 .\objects\rtos_mail.o: rtos.h
+.\objects\rtos_mail.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\rtos_mail.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\rtos_mail.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\rtos_mail.o: rtos_sched.h
+.\objects\rtos_mail.o: rtos.h
+.\objects\rtos_mail.o: rtos_task.h
+.\objects\rtos_mail.o: rtos_mail.h

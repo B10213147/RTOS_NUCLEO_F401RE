@@ -2,7 +2,10 @@
 #include "rtos.h"
 
 int main(void){
+
 	rtos_init(1000);
-	while(1);
+
+	while(1){
+	}
 	return 0;
 }
