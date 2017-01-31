@@ -13,6 +13,10 @@
 #endif /* __cplusplus */
 	 
 void i2c_driver_init(void);
+void i2c_Master_Transmitter(void);
+void i2c_Master_Receiver(void);
+void i2c_Slave_Transmitter(void);
+void i2c_Slave_Receiver(void);
 	 
 #ifdef __cplusplus
 }

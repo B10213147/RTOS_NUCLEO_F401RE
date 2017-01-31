@@ -44,3 +44,24 @@ void i2c_driver_init(void){
 	I2C_Cmd(I2C1, ENABLE);
 	I2C_Cmd(I2C2, ENABLE);
 }
+
+void i2c_Master_Transmitter(void){
+	I2C_GenerateSTART(I2C1, ENABLE);
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
+	I2C_Send7bitAddress(I2C1, 0x10, I2C_Direction_Transmitter);
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
+	I2C_SendData(I2C1, 'M');
+	while(!I2C_GetFlagStatus(I2C1,I2C_FLAG_BTF));
+	I2C_GenerateSTOP(I2C1, ENABLE);
+}
+
+void i2C_Master_Receiver(void){
+	
+}
+
+void i2c_Slave_Transmitter(void){
+	
+}
+void i2c_Slave_Reciver(void){
+	
+}
