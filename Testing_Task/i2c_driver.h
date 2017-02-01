@@ -17,6 +17,7 @@ void i2c_Master_Transmitter(void);
 void i2c_Master_Receiver(void);
 void i2c_Slave_Transmitter(void);
 void i2c_Slave_Receiver(void);
+void test1(void);
 	 
 #ifdef __cplusplus
 }
