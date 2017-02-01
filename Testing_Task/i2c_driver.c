@@ -10,6 +10,9 @@
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_i2c.h"
 
+uint8_t I2C_read_ack(I2C_TypeDef* I2Cx);
+uint8_t I2C_read_nack(I2C_TypeDef* I2Cx);
+
 void i2c_driver_init(void){
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1 | RCC_APB1Periph_I2C2, ENABLE);	
@@ -57,14 +60,14 @@ void i2c_Master_Transmitter(void){
 	I2C_GenerateSTOP(I2C1, ENABLE);
 }
 
-char master_Rx;
+char master_Rx[2];
 void i2C_Master_Receiver(void){
 	I2C_GenerateSTART(I2C1, ENABLE);
 	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
 	I2C_Send7bitAddress(I2C1, 0x10, I2C_Direction_Receiver);
 	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED));
 	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_RECEIVED));
-	master_Rx = I2C_ReceiveData(I2C1);
+	master_Rx[0] = I2C_ReceiveData(I2C1);
 	I2C_GenerateSTOP(I2C1, ENABLE);
 }
 
@@ -110,3 +113,67 @@ void test1(void){
 	while(!I2C_CheckEvent(I2C2, I2C_EVENT_SLAVE_STOP_DETECTED));
 }
 
+void test2(void){
+	master_Rx[0] = 0; master_Rx[1] = 0;
+	I2C_GenerateSTART(I2C1, ENABLE);
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
+	I2C_Send7bitAddress(I2C1, 0x30, I2C_Direction_Receiver);
+	
+	while(!I2C_CheckEvent(I2C2, I2C_EVENT_SLAVE_TRANSMITTER_ADDRESS_MATCHED));
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED));
+	
+	I2C_SendData(I2C2, '0');
+	while(!I2C_CheckEvent(I2C2, I2C_EVENT_SLAVE_BYTE_TRANSMITTING));
+	
+	master_Rx[0] = I2C_read_ack(I2C1);
+/*	
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_RECEIVED));
+	master_Rx[0] = I2C_ReceiveData(I2C1);	
+*/	
+	I2C_SendData(I2C2, '1');
+	while(!I2C_CheckEvent(I2C2, I2C_EVENT_SLAVE_BYTE_TRANSMITTED));
+	
+	master_Rx[1] = I2C_read_nack(I2C1);
+/*	
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_RECEIVED));
+	I2C_AcknowledgeConfig(I2C1, DISABLE);
+	I2C_GenerateSTOP(I2C1, ENABLE);	
+	master_Rx[1] = I2C_ReceiveData(I2C1);
+	//while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_RECEIVED));
+*/	
+	I2C_AcknowledgeConfig(I2C1, ENABLE);
+	//I2C_GenerateSTOP(I2C1, ENABLE);	
+	//while(!I2C_CheckEvent(I2C2, I2C_EVENT_SLAVE_ACK_FAILURE));
+}
+
+/* This function reads one byte from the slave device 
+* and acknowledges the byte (requests another byte)
+*/
+uint8_t I2C_read_ack(I2C_TypeDef* I2Cx){
+    uint8_t data;
+    // enable acknowledge of recieved data
+    I2C_AcknowledgeConfig(I2Cx, ENABLE);
+    // wait until one byte has been received
+    while( !I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_BYTE_RECEIVED) );
+    // read data from I2C data register and return data byte
+    data = I2C_ReceiveData(I2Cx);
+    return data;
+}
+
+/* This function reads one byte from the slave device
+* and doesn't acknowledge the recieved data 
+*/
+uint8_t I2C_read_nack(I2C_TypeDef* I2Cx){
+    uint8_t data;
+    // disabe acknowledge of received data
+    // nack also generates stop condition after last byte received
+    // see reference manual for more info
+	
+    while( !I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_BYTE_RECEIVED) );
+    I2C_AcknowledgeConfig(I2Cx, DISABLE);
+    I2C_GenerateSTOP(I2Cx, ENABLE);
+    // wait until one byte has been received
+    // read data from I2C data register and return data byte
+    data = I2C_ReceiveData(I2Cx);
+    return data;
+}
