@@ -42,7 +42,7 @@ void i2c_driver_init(void){
 	I2C_InitStruct.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
 	I2C_Init(I2C1, &I2C_InitStruct);
 	
-	I2C_InitStruct.I2C_OwnAddress1 = 0x30;
+	I2C_InitStruct.I2C_OwnAddress1 = 0x40;
 	I2C_Init(I2C2, &I2C_InitStruct);
 	
 	I2C_ITConfig(I2C2, I2C_IT_BUF | I2C_IT_EVT | I2C_IT_ERR, ENABLE);
@@ -57,12 +57,13 @@ void i2c_driver_init(void){
 
 void i2c_Master_Transmitter(void){
 	I2C_GenerateSTART(I2C1, ENABLE);
-	if(I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT)){
-		I2C_Send7bitAddress(I2C1, 0x30, I2C_Direction_Transmitter);
-		while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
-		I2C_SendData(I2C1, 'M');
-		while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
-	}
+	//I2C_AcknowledgeConfig(I2C1, DISABLE);
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
+	I2C_Send7bitAddress(I2C1, 0x40, I2C_Direction_Transmitter);
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
+	I2C_SendData(I2C1, 'M');
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
+	
 	I2C_GenerateSTOP(I2C1, ENABLE);
 }
 
@@ -72,9 +73,9 @@ void i2c_Master_Receiver(void){
 	master_Rx[0] = 0; master_Rx[1] = 0;
 	I2C_GenerateSTART(I2C1, ENABLE);
 	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
-	I2C_Send7bitAddress(I2C1, 0x30, I2C_Direction_Receiver);
-	//while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED));
-	while(!I2C_GetFlagStatus(I2C1, I2C_FLAG_ADDR));
+	I2C_Send7bitAddress(I2C1, 0x40, I2C_Direction_Receiver);
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED));
+	//while(!I2C_GetFlagStatus(I2C1, I2C_FLAG_ADDR));
 	
 	if(n > 1){
 		while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_RECEIVED));
@@ -116,6 +117,7 @@ void I2C2_EV_IRQHandler(void){
 	}
 	/* Slave Receiver */
 	if(I2C_GetITStatus(I2C2, I2C_IT_RXNE)){
+		slave_Rx[1] = I2C_ReceiveData(I2C2);
 		I2C_ClearITPendingBit(I2C2, I2C_IT_RXNE);
 	}
 	if(I2C_GetITStatus(I2C2, I2C_IT_STOPF)){
