@@ -11,14 +11,15 @@
 #ifdef __cplusplus
  extern "C" {
 #endif /* __cplusplus */
+
+#include <stdint.h>
+#include "stm32f4xx_i2c.h"
 	 
 void i2c_driver_init(void);
-void i2c_Master_Transmitter(void);
-void i2c_Master_Receiver(void);
-void i2c_Slave_Transmitter(void);
-void i2c_Slave_Receiver(void);
-void test1(void);
-void test2(void);
+uint8_t TM_I2C_ReadNoRegister(I2C_TypeDef* I2Cx, uint8_t address);
+void TM_I2C_ReadMultiNoRegister(I2C_TypeDef* I2Cx, uint8_t address, uint8_t* data, uint16_t count);
+void TM_I2C_WriteNoRegister(I2C_TypeDef* I2Cx, uint8_t address, uint8_t data);
+void TM_I2C_WriteMultiNoRegister(I2C_TypeDef* I2Cx, uint8_t address, uint8_t* data, uint16_t count);
 	 
 #ifdef __cplusplus
 }
