@@ -77,10 +77,7 @@ void TM_I2C_ReadMultiNoRegister(I2C_TypeDef* I2Cx, uint8_t address, uint8_t* dat
 }
 
 void TM_I2C_WriteNoRegister(I2C_TypeDef* I2Cx, uint8_t address, uint8_t data) {
-	while(TM_I2C_Start(I2Cx, address, I2C_TRANSMITTER_MODE, I2C_ACK_DISABLE)){
-		/* Generate stop */
-		I2Cx->CR1 |= I2C_CR1_STOP;
-	}
+	TM_I2C_Start(I2Cx, address, I2C_TRANSMITTER_MODE, I2C_ACK_DISABLE);
 	TM_I2C_WriteData(I2Cx, data);
 	TM_I2C_Stop(I2Cx);
 }
