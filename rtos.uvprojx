@@ -432,6 +432,11 @@
               <FileType>1</FileType>
               <FilePath>C:\st\Cortex-M4\STM32F4xx_DSP_StdPeriph_Lib_V1.7.1\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>C:\st\Cortex-M4\STM32F4xx_DSP_StdPeriph_Lib_V1.7.1\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -451,6 +456,11 @@
               <FileName>usart_driver.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Testing_Task\usart_driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>i2c_driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Testing_Task\i2c_driver.c</FilePath>
             </File>
           </Files>
         </Group>

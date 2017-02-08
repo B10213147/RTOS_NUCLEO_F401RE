@@ -8,6 +8,10 @@
 #include "led_driver.h"
 #include "stm32f4xx_rcc.h"
 #include "stm32f4xx_gpio.h"
+#include "rtos.h"
+
+char led_data[5];
+struct rtos_mail led_mail = {0, 0, 5, led_data};
 
 void led_driver_init(void){
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
@@ -28,6 +32,12 @@ int remain = 0;
 void led_driver(void){
 	remain--;
 	if(remain <= 0){
+		char temp;
+		if(rtos_mail_read(&led_mail, &temp, 1) == 1){
+			if(temp >= '0' && temp <= '9'){
+				led_f = temp - '0';
+			}
+		}
 		GPIO_ToggleBits(GPIOA, GPIO_Pin_5);	
 		int time_intervel = period / 2 / led_f;
 		remain = time_intervel;

@@ -22,15 +22,16 @@ Dialog DLL:      TCM.DLL V1.14.9.0
  
 <h2>Project:</h2>
 I:\RTOS_NUCLEO_F401RE\rtos.uvprojx
-Project File Date:  01/22/2017
+Project File Date:  02/04/2017
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 2 (build 183)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
-compiling rtos_task.c...
-rtos_task.c(30): warning:  #550-D: variable "prev" was set but never used
-  	struct rtos_task *prev, *cur, *del_list = NULL;
-rtos_task.c: 1 warning, 0 errors
+compiling rtos_mail.c...
+compiling main.c...
+main.c(11): warning:  #111-D: statement is unreachable
+  	return 0;
+main.c: 1 warning, 0 errors
 linking...
 Program Size: Code=1112 RO-data=436 RW-data=16 ZI-data=1632  
 FromELF: creating hex file...
@@ -61,11 +62,11 @@ Package Vendor: Keil
 
    * Component: Keil::Device:Startup:2.5.0
       Source file:   MDK\Device\Source\ARM\STM32F401xx_OPT.s
-      Include file:  Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
-      Source file:   MDK\Device\Source\ARM\STM32F4xx_OTP.s
       Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f401xe.s
+      Source file:   MDK\Device\Source\ARM\STM32F4xx_OTP.s
+      Include file:  Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
       Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
