@@ -11,7 +11,7 @@ unsigned int rtos_mail_read(struct rtos_mail *mail, char *data, unsigned int num
 	unsigned int i;
 	
 	for(i = 0; i < num_bytes; i++){
-		if(mail->begin == mail->end) break;
+		if(mail->begin == mail->end) break;	// Mailbox is empty.
 		data[i] = mail->data[mail->begin];
 		mail->begin = (mail->begin + 1) % mail->length;
 	}
@@ -24,7 +24,7 @@ unsigned int rtos_mail_write(struct rtos_mail *mail, char *data, unsigned int nu
 	
 	for(i = 0; i < num_bytes; i++){
 		idx = (mail->end + 1) % mail->length;
-		if(idx == mail->begin) break;
+		if(idx == mail->begin) break;	// Mailbox is full.
 		mail->data[mail->end] = data[i];
 		mail->end = idx;
 	}
